@@ -1,0 +1,21 @@
+<h1>Store</h1>
+<p>Welcome to our product store</p>
+
+<ul>
+    {{#each products}}
+    <li>
+        <p><b>{{this.name}}</b>: {{this.description}}</p>
+        <p><b>Price</b>: ${{this.price}}</p>
+
+        <form action="/" method="POST">
+            <input type="hidden" value="{{this.id}}" name="id">
+            <button type="submit">Delete</button><br>
+        </form>
+
+        <a href="/product/{{this.id}}">Click here from to access the product</a>
+        <br>
+    </li>
+    {{/each}}
+</ul>
+
+<!-- executar esta linha para restaurar o banco: npx knex seed:run -->

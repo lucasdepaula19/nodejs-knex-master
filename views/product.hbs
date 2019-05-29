@@ -1,0 +1,74 @@
+<h1>Product</h1>
+
+<h3>Welcome to product {{zname}}</h3>
+
+<style>
+    #my_form {
+        display: none;
+    }
+</style>
+
+<script>
+
+    function showForm() {
+
+        var form = document.getElementById('my_form');
+
+        form.style.display = 'block';
+    }
+
+</script>
+
+<body>
+    <main>
+        <div style="background-color: rgba(50, 115, 220, 0.3); padding: 2em; width:300px;">
+            <p style="text-decoration: underline;"><strong>Id: </strong> {{zid}}</p>
+            <p style="text-decoration: underline;"><strong>Nome: </strong> {{zname}}</p>
+            <p style="text-decoration: underline;"><strong>Descrição: </strong> {{zdescription}}</p>
+            <p style="text-decoration: underline;"><strong>Preço: </strong> {{zprice}}</p>
+            <button id="btn_form" onclick="showForm()">Edit the product</button>
+        </div>
+        <div>
+            <form action="/update" method="POST" id="my_form">
+                <br>
+                <input type="text" name="nome" style="margin-bottom: 10px;" placeholder="Nome"><br>
+
+                <input type="text" name="descricao" style="margin-bottom: 10px;" placeholder="Descrição"><br>
+
+                <input type="number" name="preco" style="margin-bottom: 10px;" placeholder="Preço"><br>
+
+                <input type="hidden" value="{{zid}}" name="id">
+                <button type="submit">Save</button><br>
+            </form>
+
+        </div>
+
+        <div>
+            <form action="/newComment" method="post">
+                <h4>Deixe seu comentário:</h4>
+                <input type="text" name="nameUser" id="nameUser" placeholder="Informe seu nome"><br><br>
+                <input type="text" name="comment" id="comment" cols="40" rows="7"
+                    placeholder="Comente aqui ...."></textarea>
+                <br>
+                <input type="hidden" value="{{zid}}" name="id">
+                <button type="submit">Submit</button><br>
+            </form>
+            <br>
+            <h3>Comentários</h3>
+            {{#each items }}
+            <tr>
+                <td>ID: {{ this._id }}</td>
+                <td>Nome: {{ this.author }}</td>
+                <td>Comment: {{ this.comment }}</td>
+            </tr>
+            {{/each}}
+        </div>
+    </main>
+
+</body>
+
+
+
+
+
+<!-- executar esta linha para restaurar o banco: npx knex seed:run -->
